@@ -38,6 +38,14 @@
                     <a href="{{ route('comics.edit', ['comic' => $comic->id]) }}" class="btn btn-warning">
                         Modifica
                     </a>
+                    <form onsubmit="return confirm('Attenzione! Stai cancellando questo elemento, vuoi continuare?')" action="{{ route('comics.destroy', ['comic' => $comic->id]) }}" class="d-inline-block">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">
+                            Elimina
+                        </button>
+                    </form>
+                    
                 </td>
             </tr>
         @endforeach
