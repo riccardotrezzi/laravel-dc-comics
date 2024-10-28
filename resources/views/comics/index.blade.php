@@ -3,7 +3,7 @@
 @section('page-title', 'Comics')
 
 @section('main-content')
-<h1>
+<h1 class="text-center mb-3">
     Comics
 </h1>
 
@@ -34,6 +34,9 @@
                 <td>
                     <a href="{{ route('comics.show', ['comic' => $comic->id]) }}" class="btn btn-primary">
                         Guarda!
+                    </a>
+                    <a href="{{ route('comics.edit', ['comic' => $comic->id]) }}" class="btn btn-warning">
+                        Modifica
                     </a>
                 </td>
             </tr>

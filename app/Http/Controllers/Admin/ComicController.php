@@ -35,21 +35,22 @@ class ComicController extends Controller
     {
         $data = $request->all();
         $comic = new Comic();
-            $comic->title = $data['title'];
-            $comic->description = $data['description'];
-            $comic->thumb = $data['thumb'];
-            $priceNumber = floatval($data['price']);
-            $comic-> price = $priceNumber;
-            $comic->series = $data['series'];
-            $comic->sale_date = $data['sale_date'];
-            $comic->type = $data['type'];
+        $comic->title = $data['title'];
+        $comic->description = $data['description'];
+        $comic->thumb = $data['thumb'];
+        $priceNumber = floatval($data['price']);
+        $comic-> price = $priceNumber;
+        $comic->series = $data['series'];
+        $comic->sale_date = $data['sale_date'];
+        $comic->type = $data['type'];
 
-            $explodeArtists = explode(',', $data['artists']);
-            $jsonArtists = json_encode($explodeArtists);
-            $comic->artists = $jsonArtists;
+        $explodeArtists = explode(',', $data['artists']);
+        $jsonArtists = json_encode($explodeArtists);
+        $comic->artists = $jsonArtists;
 
-            $correctWriters = str_replace(',', '|', $data['writers']);
-            $comic->writers = $correctWriters;
+        $correctWriters = str_replace(',', '|', $data['writers']);
+        $comic->writers = $correctWriters;
+        $comic->save();
 
         //return redirect()->route('comics.index');
 
@@ -67,17 +68,39 @@ class ComicController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Comic $comic)
+    public function edit(string $id)
     {
-        //
+        $comic = Comic::findOrFail($id);
+        return view('comics.edit', compact('comic'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Comic $comic)
-    {
-        //
+    public function update(Request $request, string $id)
+    {   
+
+        $comic = Comic::findOrFail($id);
+        $data = $request->all();
+
+        $comic->title = $data['title'];
+        $comic->description = $data['description'];
+        $comic->thumb = $data['thumb'];
+        $priceNumber = floatval($data['price']);
+        $comic-> price = $priceNumber;
+        $comic->series = $data['series'];
+        $comic->sale_date = $data['sale_date'];
+        $comic->type = $data['type'];
+
+        $explodeArtists = explode(',', $data['artists']);
+        $jsonArtists = json_encode($explodeArtists);
+        $comic->artists = $jsonArtists;
+
+        $correctWriters = str_replace(',', '|', $data['writers']);
+        $comic->writers = $correctWriters;
+        $comic->save();
+         
+        return redirect()->route('comics.show', ['comic' => $comic->id]);
     }
 
     /**
