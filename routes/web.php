@@ -16,12 +16,7 @@ use App\Http\Controllers\Admin\ComicController;
 |
 */
 
-Route::get('/', function () {
-
-    return view('welcome', [
-
-    ]);
-});
 
 
-Route::resources('comic', ComicController::class);
+
+Route::resource('comics', ComicController::class);
