@@ -13,7 +13,6 @@
     <div class="mb-3">
         <label for="title" class="form-label">Titolo <span class="text-danger">*</span></label>
         <input type="text" class="form-control" id="title" name="title" required maxlength="128" placeholder="Inserisci il titolo...">
-
     </div>
 
     <div class="mb-3">
